@@ -1,10 +1,10 @@
 # Pós-graduação em Desenvolvimento Web Full-Stack
 
-**Disciplina:** Microserviços e APIs
-**Professor:** Thiago Rodrigues - southiagorm@gmail.com
-**Aluno:** Williams Alves Dantas  
-**E-mail:** williamsad9@gmail.com  
-**RGM:** 38441381  
+**Disciplina:** Microserviços e APIs</br>
+**Professor:** Thiago Rodrigues - southiagorm@gmail.com</br>
+**Aluno:** Williams Alves Dantas  </br>
+**E-mail:** williamsad9@gmail.com  </br>
+**RGM:** 38441381  </br>
 
 ## Projeto 1
 
