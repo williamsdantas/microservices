@@ -1,11 +1,11 @@
 spring:
   application:
-    name:api.pedidos
-datasource:
-  driver-class-name: com.mysql.cj.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/pedidos-db?createDatabaseIfNotExist=true
-  password: 38441381
-  username: root
+    name: api.pedidos
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/pedidos-db?createDatabaseIfNotExist=true
+    username: root
+    password: 38441381
   jpa:
     hibernate:
       ddl-auto: update
@@ -17,5 +17,4 @@ eureka:
     service-url:
       defaultZone: http://localhost:8081/eureka
 server:
-  port: 0
-
+  port: 8080
