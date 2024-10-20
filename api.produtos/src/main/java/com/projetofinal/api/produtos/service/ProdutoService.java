@@ -35,6 +35,7 @@ public class ProdutoService {
 
     }
 
+
     @Transactional
     public boolean reservarProduto(Long id, Integer quantidadeSolicitada) {
         Optional<Produto> produtoOpt = produtoRepository.findById(id);
@@ -50,6 +51,38 @@ public class ProdutoService {
                 throw new EstoqueInsuficienteException("Quantidade insuficiente para o produto com id: " + id);
             }
         } else {
+            throw new EstoqueInsuficienteException("Produto não encontrado com id: " + id);
+        }
+    }
+
+    @Transactional
+    public ProdutoDto atualizarProduto(Long id, ProdutoDto produtoDto) {
+        Optional<Produto> produtoOpt = produtoRepository.findById(id);
+
+        if (produtoOpt.isPresent()) {
+            Produto produto = produtoOpt.get(); // Recupera o produto existente
+
+            // Atualiza os campos do produto com os dados do DTO
+            produto.setNome(produtoDto.nome());
+            produto.setDescricao(produtoDto.descricao());
+            produto.setQuantidade(produtoDto.quantidade());
+            produto.setPreco(produtoDto.preco());
+
+            // Salva o produto atualizado no banco de dados e retorna o DTO
+            return new ProdutoDto(produtoRepository.save(produto));
+        }
+        throw new EstoqueInsuficienteException("Produto não encontrado com id: " + id);
+    }
+
+
+    @Transactional
+    public void delete(Long id) {
+        Optional<Produto> produtoOpt = produtoRepository.findById(id);
+
+        if (produtoOpt.isPresent()) {
+            produtoRepository.deleteById(id);
+        }
+        else {
             throw new EstoqueInsuficienteException("Produto não encontrado com id: " + id);
         }
     }

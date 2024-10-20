@@ -36,9 +36,22 @@ public class ProdutoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoService.cadastrar(ProdutoDto));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ProdutoDto> update(@PathVariable Long id, @RequestBody @Valid ProdutoDto produtoDto){
+        return ResponseEntity.ok(produtoService.atualizarProduto(id, produtoDto));
+    }
+
     @PostMapping("/{id}/reservar")
     public ResponseEntity<String> reservarProduto(@PathVariable Long id, @RequestParam Integer qt) {
         produtoService.reservarProduto(id, qt);
         return ResponseEntity.ok("Quantidade reservada com sucesso.");
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> remover(@PathVariable Long id){
+        produtoService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }
