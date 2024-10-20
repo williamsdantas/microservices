@@ -28,9 +28,9 @@ Propriedades para um model do usuário
 Criar um sistema com as boas práticas de microsserviços, a partir dos requisitos
 abaixo:
 
-Crie uma api para gerenciar (CRUD) os produtos e outra para gerenciar os
+<p>Crie uma api para gerenciar (CRUD) os produtos e outra para gerenciar os
 pedidos. Obs. Leve em consideração que cada pedido tem apenas um
-produto.
+produto.</p>
 • Criar um api gateway e um sistema de serviço de registro (service registry) e
 serviço de descoberta (service discovery) para o ecossistema e
 comunicação dos serviços.
@@ -40,6 +40,7 @@ camadas, model, repository, dto, service e controller.
 disponível para criar o pedido, para isso a api de pedidos deverá se
 comunicar com a api de produtos. Utilize o openfeign para realizar a
 comunicação entre os microsserviços de pedido e produto.
+
 o Fluxo:
 ▪ O cliente envia uma requisição para o Microservice Pedidos
 para criar um novo pedido.
