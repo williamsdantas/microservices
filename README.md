@@ -84,4 +84,39 @@ dados com o status "pendente". (Dica o endpoint de produtos realiza
 a lógica e retorna true ou false dependendo da quantidade de
 produtos).</p>
 
+<h2>Microserviço de Produtos(api.produtos)</h2>
 
+<p>O microserviço de Produtos é responsável por gerenciar as operações relacionadas aos produtos disponíveis no sistema. As principais funcionalidades incluem:</p>
+
+<ul>
+    <li>
+        <strong>Buscar Produto por ID:</strong> 
+        Permite recuperar as informações de um produto específico através do seu ID.
+    </li>
+    <li>
+        <strong>Listar Produtos Disponíveis:</strong> 
+        Retorna uma lista paginada de todos os produtos cadastrados no sistema.
+    </li>
+    <li>
+        <strong>Cadastrar Novo Produto:</strong> 
+        Permite a criação de novos produtos, recebendo os dados no formato <code>ProdutoDto</code>.
+    </li>
+    <li>
+        <strong>Reservar Produto:</strong> 
+        Valida a disponibilidade de um produto e reserva uma quantidade solicitada, atualizando a quantidade disponível.
+    </li>
+    <li>
+        <strong>Atualizar Produto:</strong> 
+        Permite a atualização dos dados de um produto existente com base no seu ID.
+    </li>
+    <li>
+        <strong>Deletar Produto:</strong> 
+        Remove um produto do sistema, garantindo que o produto existe antes de realizar a exclusão.
+    </li>
+</ul>
+
+<h3>Exceções</h3>
+<p>O microserviço utiliza a exceção personalizada <code>EstoqueInsuficienteException</code> para lidar com casos de produtos não encontrados ou quando a quantidade solicitada para reserva é insuficiente.</p>
+
+<h3>Dependências</h3>
+<p>Este microserviço é construído com Spring Boot e utiliza JPA para interação com o banco de dados, garantindo operações transacionais e uma abordagem limpa para persistência de dados.</p>
