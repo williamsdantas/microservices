@@ -32,7 +32,13 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public ResponseEntity<ProdutoDto> registrar(@RequestBody @Valid ProdutoDto ProdutoDto){
+    public ResponseEntity<ProdutoDto> cadastrar(@RequestBody @Valid ProdutoDto ProdutoDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoService.cadastrar(ProdutoDto));
+    }
+
+    @PostMapping("/{id}/reservar")
+    public ResponseEntity<String> reservarProduto(@PathVariable Long id, @RequestParam Integer qt) {
+        produtoService.reservarProduto(id, qt);
+        return ResponseEntity.ok("Quantidade reservada com sucesso.");
     }
 }
