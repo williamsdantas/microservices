@@ -31,29 +31,29 @@ abaixo:
 <p>Crie uma api para gerenciar (CRUD) os produtos e outra para gerenciar os
 pedidos. Obs. Leve em consideração que cada pedido tem apenas um
 produto.</p>
-• Criar um api gateway e um sistema de serviço de registro (service registry) e
+<p>• Criar um api gateway e um sistema de serviço de registro (service registry) e
 serviço de descoberta (service discovery) para o ecossistema e
-comunicação dos serviços.
-• Os serviços de pedido e produtos devem ser divididos nos pacotes e
+comunicação dos serviços.</p>
+<p>• Os serviços de pedido e produtos devem ser divididos nos pacotes e
 camadas, model, repository, dto, service e controller.
-• Quando um novo pedido for ser criado, verificar se existe produto
+<p>• Quando um novo pedido for ser criado, verificar se existe produto
 disponível para criar o pedido, para isso a api de pedidos deverá se
 comunicar com a api de produtos. Utilize o openfeign para realizar a
-comunicação entre os microsserviços de pedido e produto.
+comunicação entre os microsserviços de pedido e produto.</p>
 
-o Fluxo:
-▪ O cliente envia uma requisição para o Microservice Pedidos
+# Fluxo:
+<p>▪ O cliente envia uma requisição para o Microservice Pedidos
 para criar um novo pedido.
-▪ O Microservice de Pedidos valida os dados do pedido e
-consulta o Microservice Produtos para verificar a
+<p>▪ O Microservice de Pedidos valida os dados do pedido e
+consu<p>lta o Microservice Produtos para verificar a
 disponibilidade dos itens. (Verifique a disponibilidade pela
-propriedade quantidade do produto)
+propriedade quantidade do produto)</p>
 
-o Se os itens estiverem disponíveis (quantidade do produto for maior
+<p> Se os itens estiverem disponíveis (quantidade do produto for maior
 que zero), diminua a quantidade de produto no banco de dados de
 produto e o Microservice de Pedidos persiste o pedido no banco de
 dados com o status "pendente". (Dica o endpoint de produtos realiza
 a lógica e retorna true ou false dependendo da quantidade de
-produtos).
+produtos).</p>
 
 
