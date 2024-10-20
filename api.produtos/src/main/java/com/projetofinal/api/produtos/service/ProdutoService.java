@@ -37,7 +37,7 @@ public class ProdutoService {
 
 
     @Transactional
-    public boolean reservarProduto(Long id, Integer quantidadeSolicitada) {
+    public void reservarProduto(Long id, Integer quantidadeSolicitada) {
         Optional<Produto> produtoOpt = produtoRepository.findById(id);
 
         if (produtoOpt.isPresent()) {
@@ -46,7 +46,6 @@ public class ProdutoService {
                 // Reduzir a quantidade disponível
                 produto.setQuantidade(produto.getQuantidade() - quantidadeSolicitada);
                 produtoRepository.save(produto); // Salvar a nova quantidade no banco de dados
-                return true;
             } else {
                 throw new EstoqueInsuficienteException("Quantidade insuficiente para o produto com id: " + id);
             }
