@@ -26,11 +26,34 @@ o As três rotas descritas anteriormente
 Propriedades para um model do usuário
 • (id, nome, email, senha, telefone, endereço)
 
-## Projeto 2
+## Projeto Final
 **Participantes:**
-**Aluno:** Williams Alves Dantas  </br>
-**E-mail:** williamsad9@gmail.com  </br>
-**RGM:** 38441381  </br>
+<table style="width:100%">
+  <tr>
+    <th>Matricula</th>
+    <th>Nome</th>
+    <th>E-mail</th>
+  </tr>
+  <tr>
+    <td>38601648</td>
+    <td>Joabe da Silva Senas</td>
+    <td>joasen99@gmail.com</td>
+  </tr>
+  <tr>
+    <td>38889854</td>
+    <td>Lucas Farias Costa</td>
+    <td>lucasfarias14@outlook.com</td>
+  </tr>
+  <tr>
+    <td>38441381</td>
+    <td>Williams Alves Dantas</td>
+    <td>williamsad9@gmail.com</td>
+  </tr>
+  
+</table>
+
+
+**Objetivo:** 
 Criar um sistema com as boas práticas de microsserviços, a partir dos requisitos
 abaixo:
 
