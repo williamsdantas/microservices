@@ -118,5 +118,4 @@ produtos).</p>
 <h3>Exceções</h3>
 <p>O microserviço utiliza a exceção personalizada <code>EstoqueInsuficienteException</code> para lidar com casos de produtos não encontrados ou quando a quantidade solicitada para reserva é insuficiente.</p>
 
-<h3>Dependências</h3>
-<p>Este microserviço é construído com Spring Boot e utiliza JPA para interação com o banco de dados, garantindo operações transacionais e uma abordagem limpa para persistência de dados.</p>
+<h2>Microserviço de Pedidos(api.pedidos)</h2>
