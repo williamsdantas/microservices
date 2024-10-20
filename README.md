@@ -35,7 +35,7 @@ produto.</p>
 serviço de descoberta (service discovery) para o ecossistema e
 comunicação dos serviços.</p>
 <p>• Os serviços de pedido e produtos devem ser divididos nos pacotes e
-camadas, model, repository, dto, service e controller.
+camadas, model, repository, dto, service e controller.</p>
 <p>• Quando um novo pedido for ser criado, verificar se existe produto
 disponível para criar o pedido, para isso a api de pedidos deverá se
 comunicar com a api de produtos. Utilize o openfeign para realizar a
@@ -44,8 +44,7 @@ comunicação entre os microsserviços de pedido e produto.</p>
 # Fluxo:
 <p>▪ O cliente envia uma requisição para o Microservice Pedidos
 para criar um novo pedido.
-<p>▪ O Microservice de Pedidos valida os dados do pedido e
-consu<p>lta o Microservice Produtos para verificar a
+<p>▪ O Microservice de Pedidos valida os dados do pedido e consulta o Microservice Produtos para verificar a
 disponibilidade dos itens. (Verifique a disponibilidade pela
 propriedade quantidade do produto)</p>
 
