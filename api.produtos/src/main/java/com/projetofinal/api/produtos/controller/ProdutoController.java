@@ -4,6 +4,9 @@ import com.projetofinal.api.produtos.dto.ProdutoDto;
 import com.projetofinal.api.produtos.service.ProdutoService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,11 @@ public class ProdutoController {
     @GetMapping("/{id}")
     public ResponseEntity<ProdutoDto> findById(@PathVariable Long id){
         return ResponseEntity.ok(produtoService.findById(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<ProdutoDto>> ProdutosDisponiveis(@PageableDefault(size= 10) Pageable pagination){
+        return ResponseEntity.ok(produtoService.findAll(pagination));
     }
 
     @PostMapping
