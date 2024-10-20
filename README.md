@@ -55,4 +55,9 @@ dados com o status "pendente". (Dica o endpoint de produtos realiza
 a lógica e retorna true ou false dependendo da quantidade de
 produtos).</p>
 
+#Execução
+
+<p>▪ Criação do Service-registry</p>
+
+
 
