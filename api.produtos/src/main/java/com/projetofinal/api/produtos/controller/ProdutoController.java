@@ -42,8 +42,8 @@ public class ProdutoController {
     }
 
     @PostMapping("/{id}/reservar")
-    public ResponseEntity<String> reservarProduto(@PathVariable Long id, @RequestParam Integer qt) {
-        produtoService.reservarProduto(id, qt);
+    public ResponseEntity<String> reservarProduto(@PathVariable Long id) {
+        produtoService.reservarProduto(id);
         return ResponseEntity.ok("Quantidade reservada com sucesso.");
     }
 
