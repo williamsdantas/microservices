@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 @FeignClient(name = "api.produtos" )
 public interface ProdutoClient {
 
-    @PostMapping(value = "/{id}/reservar" , consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/produtos/{id}/reservar" , consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> reservarProduto(@PathVariable("id") Long id);
 }
 

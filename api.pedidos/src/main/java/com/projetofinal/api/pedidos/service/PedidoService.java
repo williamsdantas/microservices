@@ -5,6 +5,8 @@ import com.projetofinal.api.pedidos.model.StatusPedido;
 import com.projetofinal.api.pedidos.repository.PedidoRepository;
 import feign.FeignException;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.http.ResponseEntity;
 
@@ -30,7 +32,7 @@ public class PedidoService {
             if (response.getStatusCode().is2xxSuccessful()) {
                 // Quantidade reservada com sucesso, então confirma o pedido
                 pedido.setStatus(StatusPedido.CONFIRMADO);
-            }else if (response.getStatusCode().is4xxClientError()) {
+            }else{
                 pedido.setStatus(StatusPedido.CANCELADO);
             }
 
@@ -38,8 +40,7 @@ public class PedidoService {
         catch (FeignException e) {
             // Caso ocorra um erro na comunicação com o microservice de produtos
             pedido.setStatus(StatusPedido.CANCELADO);
-            
-        }
+       }
 
         return new PedidoDto(pedidoRepository.save(pedido));
     }
@@ -60,12 +61,18 @@ public class PedidoService {
 
         if (pedidoOpt.isPresent()) {
             Pedido pedido = pedidoOpt.get();
-
-            pedido.setDataPedido(pedidoDto.dataPedido());
-            pedido.setEndereco(pedidoDto.endereco());
-            pedido.setIdProduto(pedidoDto.idProduto());
-            pedido.setStatus(pedidoDto.status());
-
+            // atualiza o pedido sem mudar o produto
+            if(pedido.getIdProduto().equals(pedidoDto.idProduto()))
+            {
+                pedido.setDataPedido(pedidoDto.dataPedido());
+                pedido.setEndereco(pedidoDto.endereco());
+                pedido.setIdProduto(pedidoDto.idProduto());
+                pedido.setStatus(pedidoDto.status());
+            }else{
+                pedido.setStatus(StatusPedido.CANCELADO);
+                pedidoRepository.save(pedido);
+                return criarPedido(pedidoDto);
+            }
             return new PedidoDto(pedidoRepository.save(pedido));
         }
         return null;
@@ -76,7 +83,7 @@ public class PedidoService {
     }
 
 
-    public List<PedidoDto> buscarTodos() {
-        return List.of();
+    public Page<PedidoDto> buscarTodos(Pageable pagination) {
+        return pedidoRepository.findAll(pagination).map(p -> new PedidoDto(p));
     }
 }
