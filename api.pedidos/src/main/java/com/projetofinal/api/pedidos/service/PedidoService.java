@@ -3,6 +3,7 @@ package com.projetofinal.api.pedidos.service;
 import com.projetofinal.api.pedidos.external.ProdutoClient;
 import com.projetofinal.api.pedidos.model.StatusPedido;
 import com.projetofinal.api.pedidos.repository.PedidoRepository;
+import feign.FeignException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.http.ResponseEntity;
@@ -22,16 +23,24 @@ public class PedidoService {
 
     public PedidoDto criarPedido(PedidoDto pedidoDto) {
         Pedido pedido = Pedido.fromDto(pedidoDto);
+        try{
+            // Reservar o produto via Feign Client
+            ResponseEntity<String> response = produtoClient.reservarProduto(pedido.getIdProduto());
 
-        // Reservar a quantidade de produto via Feign Client
-        ResponseEntity<String> response = produtoClient.reservarProduto(pedido.getIdProduto());
+            if (response.getStatusCode().is2xxSuccessful()) {
+                // Quantidade reservada com sucesso, então confirma o pedido
+                pedido.setStatus(StatusPedido.CONFIRMADO);
+            }else if (response.getStatusCode().is4xxClientError()) {
+                pedido.setStatus(StatusPedido.CANCELADO);
+            }
 
-        if (response.getStatusCode().is2xxSuccessful()) {
-            // Quantidade reservada com sucesso, então confirma o pedido
-            pedido.setStatus(StatusPedido.CONFIRMADO);
-        } else {
-            pedido.setStatus(StatusPedido.CANCELADO);
         }
+        catch (FeignException e) {
+            // Caso ocorra um erro na comunicação com o microservice de produtos
+            pedido.setStatus(StatusPedido.CANCELADO);
+            
+        }
+
         return new PedidoDto(pedidoRepository.save(pedido));
     }
 
