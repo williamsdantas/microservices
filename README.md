@@ -119,3 +119,32 @@ produtos).</p>
 <p>O microserviço utiliza a exceção personalizada <code>EstoqueInsuficienteException</code> para lidar com casos de produtos não encontrados ou quando a quantidade solicitada para reserva é insuficiente.</p>
 
 <h2>Microserviço de Pedidos(api.pedidos)</h2>
+
+<p>Este microserviço é responsável pelo gerenciamento de pedidos dentro do sistema. Ele provê uma API RESTful que permite a criação, atualização, consulta e exclusão de pedidos. O microserviço de pedidos também é responsável por validar a disponibilidade dos itens consultando o microserviço de produtos.</p>
+
+<h2>Funcionalidades Principais</h2>
+<ul>
+  <li><strong>Criar Pedido:</strong> Cria um novo pedido a partir dos dados fornecidos no corpo da requisição.</li>
+  <li><strong>Listar Todos os Pedidos:</strong> Retorna uma lista paginada de todos os pedidos disponíveis no sistema.</li>
+  <li><strong>Buscar Pedido por ID:</strong> Recupera as informações de um pedido específico utilizando o ID fornecido na URL.</li>
+  <li><strong>Atualizar Pedido:</strong> Atualiza as informações de um pedido existente.Se o pedido mudar de produto, será cancelado e criado um novo.</li>
+  <li><strong>Deletar Pedido:</strong> Remove um pedido do sistema com base no ID fornecido.</li>
+</ul>
+
+<h2>Exemplo de Endpoints</h2>
+<ul>
+  <li><strong>POST /pedidos:</strong> Cria um novo pedido.</li>
+  <li><strong>GET /pedidos:</strong> Lista todos os pedidos de forma paginada.</li>
+  <li><strong>GET /pedidos/{id}:</strong> Busca os detalhes de um pedido específico por ID.</li>
+  <li><strong>PUT /pedidos/{id}:</strong> Atualiza os detalhes de um pedido.</li>
+  <li><strong>DELETE /pedidos/{id}:</strong> Exclui um pedido pelo ID.</li>
+</ul>
+
+<h2>Tecnologias Utilizadas</h2>
+<ul>
+  <li><strong>Spring Boot:</strong> Framework para desenvolvimento de aplicações Java.</li>
+  <li><strong>Spring Data JPA:</strong> Para persistência e manipulação de dados.</li>
+  <li><strong>Hibernate:</strong> Para gerenciamento de entidades e mapeamento objeto-relacional.</li>
+  <li><strong>MySQL:</strong> Banco de dados utilizado para armazenar os pedidos.</li>
+  <li><strong>OpenFeign:</strong> Para a comunicação com o microserviço de produtos e validação de disponibilidade de itens.</li>
+</ul>
