@@ -1,8 +1,11 @@
 package com.projetofinal.api.pedidos.service;
 
+import com.projetofinal.api.pedidos.external.ProdutoClient;
+import com.projetofinal.api.pedidos.model.StatusPedido;
 import com.projetofinal.api.pedidos.repository.PedidoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.http.ResponseEntity;
 
 import com.projetofinal.api.pedidos.model.Pedido;
 import com.projetofinal.api.pedidos.dto.PedidoDto;
@@ -14,13 +17,25 @@ import java.util.List;
 @Service
 public class PedidoService {
 
-    private PedidoRepository pedidoRepository;
+    private final PedidoRepository pedidoRepository;
+    private final ProdutoClient produtoClient;
 
-    public PedidoDto criarPedido(PedidoDto pedidoDto){
+    public PedidoDto criarPedido(PedidoDto pedidoDto) {
         Pedido pedido = Pedido.fromDto(pedidoDto);
 
+        // Reservar a quantidade de produto via Feign Client
+        ResponseEntity<String> response = produtoClient.reservarProduto(pedido.getIdProduto());
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            // Quantidade reservada com sucesso, então confirma o pedido
+            pedido.setStatus(StatusPedido.CONFIRMADO);
+        } else {
+            pedido.setStatus(StatusPedido.CANCELADO);
+        }
         return new PedidoDto(pedidoRepository.save(pedido));
     }
+
+
 
     public PedidoDto buscarPorId(Long id) {
         Optional<Pedido> pedidoOpt = pedidoRepository.findById(id);
